@@ -1,20 +1,31 @@
 const Shell = require('node-powershell');
 
+let ps = new Shell({
+    executionPolicy: 'Bypass',
+    noProfile: true
+});
+
 module.exports = {
-    test: function () {
-        const ps = new Shell({
-            executionPolicy: 'Bypass',
-            noProfile: true
-        });
-
-        ps.addCommand('echo node-powershell');
-        ps.invoke()
-            .then(output => {
-                console.log(output);
-            })
-            .catch(err => {
-                console.log(err);
+    wlan: {
+        running: () => {
+            ps.addCommand('netsh wlan show hostednetwork')
+            ps.invoke().then(output => {
+                ps.dispose();
+                return output
+            }).catch(err => {
+                ps.dispose();
+                return err;
             });
+             
+        },
+        start: () => {
+            return 'start'
+        },
+        stop: () => {
+            return 'stop'
+        }
     }
+}
 
+function tst() {
 }

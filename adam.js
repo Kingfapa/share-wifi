@@ -1,2 +1,3 @@
-const test = require('./test')
-test();
+const { wlan } = require('./share-wifi')
+
+console.log(wlan.running());
