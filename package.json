@@ -20,6 +20,8 @@
     "electron": "^6.0.12"
   },
   "dependencies": {
-    "node-powershell": "^4.0.0"
+    "node-hotspot": "^0.1.7",
+    "node-powershell": "^4.0.0",
+    "node-wifi": "^2.0.12"
   }
 }

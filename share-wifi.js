@@ -8,15 +8,11 @@ let ps = new Shell({
 module.exports = {
     wlan: {
         running: () => {
-            ps.addCommand('netsh wlan show hostednetwork')
-            ps.invoke().then(output => {
-                ps.dispose();
-                return output
-            }).catch(err => {
-                ps.dispose();
-                return err;
-            });
-             
+            return exec('echo hej', (err, stdout, stderr) => {
+                if (err) return;
+                return stdout
+                //console.log('stderr:', stderr)
+            })
         },
         start: () => {
             return 'start'
@@ -27,5 +23,14 @@ module.exports = {
     }
 }
 
-function tst() {
+async function tst() {
+    ps.addCommand('netsh wlan show hostednetwork')
+    return ps.invoke().then(output => {
+        return output
+    }).catch(err => {
+        return err
+    }).finally(output => {
+        console.log('Done')
+        ps.dispose();
+    });
 }

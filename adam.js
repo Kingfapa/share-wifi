@@ -1,3 +1,4 @@
 const { wlan } = require('./share-wifi')
-
-console.log(wlan.running());
+wlan.running().then(output => {
+    console.log(output);
+})
