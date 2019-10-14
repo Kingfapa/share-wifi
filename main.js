@@ -5,11 +5,30 @@ const iconPath = path.join(__dirname, './icons/Iconsmind-Outline-Wifi-2.ico')
 const { wlan } = require('./wifi');
 const trayTemplate = [
   {
-    label: 'Force Start Hostednetwork',
-    click: async () => {
-      console.log('Force start clicked!');
-      console.log(await wlan.running());
-    }
+    label: 'Commands',
+    submenu: [
+      {
+        label: 'Show Hostednetwork',
+        click: async () => {
+          console.log('Showing hostednetwork');
+          console.log(await wlan.running());
+        }
+      },
+      {
+        label: 'Start Hostednetwork',
+        click: async () => {
+          console.log('Starting hostednetwork!');
+          console.log(await wlan.start());
+        }
+      },
+      {
+        label: 'Stop Hostednetwork',
+        click: async () => {
+          console.log('Stopping hostednework!');
+          console.log(await wlan.stop());
+        }
+      },
+    ]
   },
   {
     label: 'Exit',
