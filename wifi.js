@@ -3,9 +3,11 @@ const Shell = require('node-powershell');
 
 let ps = new Shell({
     executionPolicy: 'Bypass',
-    noProfile: true,
+    noProfile: false,
+    inputEncoding: 'utf8',
     outputEncoding: 'utf8'
 });
+ps.addCommand('[Console]::InputEncoding = [System.Text.Encoding]::UTF8');
 ps.addCommand('[Console]::OutputEncoding = [System.Text.Encoding]::UTF8');
 
 module.exports = {
@@ -32,7 +34,33 @@ module.exports = {
             ps.addCommand("netsh wlan stop hostednetwork");
             return defaultInvoke()
         }
+    },
+    ethernet: {
+        connected: () => {
+            var network = "Anslutning till lokalt nätverk"
+            ps.addCommand('Get-WmiObject -Class win32_networkadapter -filter "netconnectionid = '+ network +'" | select netconnectionid')
+            return defaultInvoke();
+        }
+    },
+    network: {
+        getPhysicalAdapters: () => {
+            ps.addCommand(`Get-WmiObject -Class win32_networkadapter -Filter "PhysicalAdapter = 'True'" | ConvertTo-Json -Compress`)
+            return defaultInvoke();
+        }
     }
+}
+
+function jsonInvoke() {
+    return ps.invoke()
+        .then(output => {
+            return JSON.parse(output);
+        })
+        .catch(err => {
+            throw err
+        })
+        .finally(_ => {
+            ps.dispose();
+        })
 }
 
 function defaultInvoke() {
@@ -84,6 +112,5 @@ function convertOutput(array) {
             }
         }
     }
-    console.log(hostednetwork)
     return hostednetwork;
 }

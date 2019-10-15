@@ -20,9 +20,13 @@
     "electron": "^6.0.12"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
     "node-hotspot": "^0.1.7",
     "node-powershell": "^4.0.0",
     "node-wifi": "^2.0.12",
-    "regedit": "^3.0.3"
+    "popper.js": "^1.15.0",
+    "regedit": "^3.0.3",
+    "utf8": "^3.0.0"
   }
 }
