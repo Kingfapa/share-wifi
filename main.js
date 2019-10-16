@@ -51,13 +51,13 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    //frame: false,
+    backgroundColor: '#FFF',
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
     }
   })
-  mainWindow.removeMenu();
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
@@ -73,9 +73,9 @@ function createWindow() {
     mainWindow = null
   })
 
-  mainWindow.on('minimize', function (event) {
+  /*mainWindow.on('minimize', function (event) {
     event.preventDefault();
     mainWindow.hide();
-  })
+  })*/
 }
 app.on('ready', createWindow)

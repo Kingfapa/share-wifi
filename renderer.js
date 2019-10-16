@@ -2,9 +2,12 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 const { wlan, ethernet, network } = require('./wifi');
-let $ = require('jquery');
-require('popper.js');
-require('bootstrap');
+const $ = require('jquery');
+const popper = require('popper.js');
+const bootstrap = require('bootstrap');
+
+//Start Window Controls
+require('./window-control')();
 
 async function hej() {
     //console.log(await wlan.running()); 
@@ -16,3 +19,7 @@ async function hej() {
 var el = $('#text');
 
 console.log(el)
+
+$(document).ready(function(){
+    $("#msgid").html("This is Hello World by JQuery");
+});
