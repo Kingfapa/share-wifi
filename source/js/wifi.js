@@ -43,9 +43,19 @@ module.exports = {
         }
     },
     network: {
-        getPhysicalAdapters: () => {
+        getPhysicalAdapters: async () => {
             ps.addCommand(`Get-WmiObject -Class win32_networkadapter -Filter "PhysicalAdapter = 'True'" | ConvertTo-Json -Compress`)
-            return defaultInvoke();
+            return await defaultInvoke();
+        },
+        statusConverter: (status) => {
+            switch(status) {
+                case 2:
+                    return 'Connected'
+                case 7:
+                    return 'Not connected'
+                default:
+                    return status
+            }
         }
     }
 }

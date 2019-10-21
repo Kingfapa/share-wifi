@@ -17,12 +17,16 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^6.0.12"
+    "electron": "^6.0.12",
+    "electron-builder": "^21.2.0"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "create-react-app": "^3.2.0",
+    "custom-electron-titlebar": "^3.1.0",
     "jquery": "^3.4.1",
     "node-hotspot": "^0.1.7",
+    "node-json2html": "^1.2.0",
     "node-powershell": "^4.0.0",
     "node-wifi": "^2.0.12",
     "popper.js": "^1.15.0",

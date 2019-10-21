@@ -2,7 +2,7 @@
 const { app, BrowserWindow, Menu, Tray } = require('electron')
 const path = require('path')
 const iconPath = path.join(__dirname, './icons/Iconsmind-Outline-Wifi-2.ico')
-const { wlan } = require('./wifi');
+const { wlan } = require('./source/js/wifi');
 const trayTemplate = [
   {
     label: 'Commands',

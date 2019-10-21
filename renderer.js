@@ -1,25 +1,29 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-const { wlan, ethernet, network } = require('./wifi');
+
+require('./source/js/titlebar');
+require('./source/js/libraries');
+
+//json2html
+require('node-json2html');
+
 const $ = require('jquery');
-const popper = require('popper.js');
-const bootstrap = require('bootstrap');
+const { wlan, ethernet, network } = require('./source/js/wifi');
+const templates = require('./source/js/templates') //for json2html
 
-//Start Window Controls
-require('./window-control')();
-
-async function hej() {
-    //console.log(await wlan.running()); 
-    const adapters = await network.getPhysicalAdapters();
-    const obj_adapters = JSON.parse(adapters);
-    console.log(obj_adapters)
+network.getPhysicalAdapters().then(res => {
+    const adapters = JSON.parse(res);
+    console.log(adapters)
+    const parent = $('#main');
+    /*let html = `<h1>Choose adapter</h1>
+    <div class="list-group">`
+    console.log(json2html.transform(adapters, adapterTemplate));
+    parent.html(html)*/
     
-}
-var el = $('#text');
+    const adapter = json2html.transform(adapters, templates.adapterTemplate);
+    const list = json2html.transform(adapters, templates.netAdapterTemplate)
+    console.log(adapter)
+    console.log(list)
+})
 
-console.log(el)
-
-$(document).ready(function(){
-    $("#msgid").html("This is Hello World by JQuery");
-});
